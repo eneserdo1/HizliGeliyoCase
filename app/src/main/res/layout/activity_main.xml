@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".view.MainActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagelogo"
+        android:layout_marginTop="131dp"
+        android:layout_gravity="center_horizontal"
+        />
+    <TextView
+        android:text="Hesabına Giriş Yap"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center_horizontal"/>
+    <EditText
+        android:id="@+id/login_username_et"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:paddingStart="10dp"
+        android:background="@drawable/edittext_background"/>
+    <EditText
+        android:id="@+id/login_password_et"
+        android:layout_width="310dp"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:paddingStart="10dp"
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_background"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Şifremi Unuttum"
+
+        />
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/button_background"
+        android:text="Giriş Yap"
+        android:textSize="20dp"
+        android:layout_margin="20dp"
+        android:textColor="#fff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hesabın Yok mu? "
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Kaydol"
+            android:textColor="#00BCD4"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
