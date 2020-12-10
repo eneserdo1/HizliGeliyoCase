@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.eneserdogan.hizligeliyocase.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_filterFragment"
+            app:destination="@id/filterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_products"
         android:name="com.eneserdogan.hizligeliyocase.view.ProductsFragment"
@@ -25,4 +29,10 @@
         android:name="com.eneserdogan.hizligeliyocase.view.PricesFragment"
         android:label="fragment_prices"
         tools:layout="@layout/fragment_prices" />
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.eneserdogan.hizligeliyocase.view.FilterFragment"
+        android:label="fragment_filter"
+        tools:layout="@layout/fragment_filter" >
+    </fragment>
 </navigation>
