@@ -6,10 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
@@ -27,17 +25,23 @@ import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {
     private lateinit var viewmodel: HomeFragmentViewmodel
-    private var productAdapter = ProductAdapter(arrayListOf())
-    private var itemList:List<Product>?=null
-    private var filteredList:List<Product>?=null
+    private lateinit var productAdapter: ProductAdapter
+    var dataList: ArrayList<Product> = ArrayList()
+    lateinit var searchView: SearchView
+    lateinit var selectedItem:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        selectedItem=requireArguments().getString("selectedItem")!!
+        println("oncreate gelen item $selectedItem")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         return root
@@ -46,24 +50,35 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewmodel = ViewModelProviders.of(this).get(HomeFragmentViewmodel::class.java)
+        searchView = view.findViewById(R.id.searcview)
 
-        initializeRecyclerview()
-        /*lifecycleScope.launch {
-
-        }*/
-
+        //fonksiyonlar
+        initializeRecyclerview(dataList)
         filterButtonListener()
-
-        viewmodel.refreshData()
-        println("runblocking içerisi")
         observeData()
+        if (selectedItem != "null"){
+            viewmodel.filterList(selectedItem,productAdapter)
+        }
 
-        println("itemlist $itemList")
 
+        //Ana sayfa searchview dinleniyor
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                if (p0 != null) {
+                    viewmodel.filterList(p0, productAdapter)
+                }
+                return false
+            }
 
+            override fun onQueryTextChange(p0: String?): Boolean {
+                if (p0 != null) {
+                    viewmodel.filterList(p0, productAdapter)
+                }
+                return false
+            }
+        })
 
     }
-
 
 
     private fun filterButtonListener() {
@@ -74,20 +89,30 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initializeRecyclerview() {
+    private fun initializeRecyclerview(dataList: ArrayList<Product>) {
+        productAdapter = ProductAdapter()
         product_recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+        productAdapter.setAppList(dataList)
         product_recyclerview.adapter = productAdapter
     }
 
     private fun observeData() {
 
-        viewmodel.productList.observe(viewLifecycleOwner, Observer<List<Product>> { products ->
-            products?.let {
-                product_recyclerview.visibility = View.VISIBLE
-                productAdapter.productListUpdate(products)
-                itemList=products
+        /* viewmodel.productList.observe(viewLifecycleOwner, Observer<List<Product>> { products ->
+             products?.let {
+                 product_recyclerview.visibility = View.VISIBLE
+                 productAdapter.productListUpdate(products)
+                 itemList=products
 
+             }
+         })*/
+        viewmodel.refreshData().observe(viewLifecycleOwner, Observer<List<Product>> {
+            if (it != null) {
+                productAdapter.setAppList(it)
+                product_recyclerview.visibility = View.VISIBLE
             }
+
+
         })
 
         viewmodel.errorMessage.observe(viewLifecycleOwner, Observer { message ->

@@ -14,18 +14,12 @@ class MainActivity : AppCompatActivity() {
 
         loginButtonListener()
 
-
     }
 
     private fun loginButtonListener() {
         login_button.setOnClickListener {
-            if (login_username_et.text.toString()=="enes" && login_password_et.text.toString() =="123456"){
-                val intent=Intent(applicationContext,MenuActivity::class.java)
-                startActivity(intent)
-            }else{
-                Toast.makeText(applicationContext,"Lütfen Gerekli Alanları Doğru Şekilde Doldurunuz ",Toast.LENGTH_LONG).show()
-            }
-
+            val intent=Intent(applicationContext,MenuActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -5,21 +5,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.FilterFragment">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/filterFragment_titleLayout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+       >
+        <TextView
+            android:id="@+id/filterFragment_close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_close_24"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+
+            />
         <TextView
             android:text="Kategoriler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:gravity="center_horizontal" 
+            android:layout_centerInParent="true"
             />
-    </LinearLayout>
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
@@ -34,6 +42,7 @@
         <ListView
             android:id="@+id/filterFragment_list"
             android:layout_width="match_parent"
+            android:choiceMode="singleChoice"
             android:layout_height="500dp"/>
         <ProgressBar
             android:id="@+id/filterFragment_loading"
@@ -42,6 +51,7 @@
             android:layout_centerInParent="true"/>
     </RelativeLayout>
     <Button
+        android:id="@+id/filterFragment_button"
         android:layout_width="250dp"
         android:layout_height="55dp"
         android:background="@drawable/button_background_2"

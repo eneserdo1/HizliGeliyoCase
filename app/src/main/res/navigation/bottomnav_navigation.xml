@@ -13,6 +13,11 @@
         <action
             android:id="@+id/action_navigation_home_to_filterFragment"
             app:destination="@id/filterFragment" />
+        <argument
+            android:name="selectedItem"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
     </fragment>
     <fragment
         android:id="@+id/navigation_products"
@@ -21,12 +26,12 @@
         tools:layout="@layout/fragment_products" />
     <fragment
         android:id="@+id/navigation_prices"
-        android:name="com.eneserdogan.hizligeliyocase.view.ProfilFragment"
+        android:name="com.eneserdogan.hizligeliyocase.view.PricesFragment"
         android:label="fragment_profil"
         tools:layout="@layout/fragment_profil" />
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.eneserdogan.hizligeliyocase.view.PricesFragment"
+        android:name="com.eneserdogan.hizligeliyocase.view.ProfilFragment"
         android:label="fragment_prices"
         tools:layout="@layout/fragment_prices" />
     <fragment
@@ -34,5 +39,8 @@
         android:name="com.eneserdogan.hizligeliyocase.view.FilterFragment"
         android:label="fragment_filter"
         tools:layout="@layout/fragment_filter" >
+        <action
+            android:id="@+id/action_filterFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 </navigation>

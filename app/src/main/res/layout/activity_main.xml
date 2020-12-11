@@ -8,11 +8,17 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     tools:context=".view.MainActivity">
+    <TextView
+        android:drawableStart="@drawable/ic_baseline_navigate_before_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="15dp"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/imagelogo"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="115dp"
         android:layout_gravity="center_horizontal"
         />
     <TextView
