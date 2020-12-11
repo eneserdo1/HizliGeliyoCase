@@ -19,11 +19,18 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun initializeBottomNavigation() {
-        val navView:BottomNavigationView=findViewById(R.id.nav_view)
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
-        val navController=findNavController(R.id.navHost_fragment)
-        val appBarConfiguration= AppBarConfiguration(setOf(R.id.navigation_home,R.id.navigation_products,R.id.navigation_prices,R.id.navigation_profile))
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        val navController = findNavController(R.id.navHost_fragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+                R.id.navigation_products,
+                R.id.navigation_prices,
+                R.id.navigation_profile
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
     }

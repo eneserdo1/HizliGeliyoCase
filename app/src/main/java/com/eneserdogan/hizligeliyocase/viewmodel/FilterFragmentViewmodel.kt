@@ -8,34 +8,44 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FilterFragmentViewmodel:ViewModel() {
-    val categoryListLive=MutableLiveData<List<String>>()
+class FilterFragmentViewmodel : ViewModel() {
+    val categoryListLive = MutableLiveData<List<String>>()
     val listOfCategory: ArrayList<String> = ArrayList<String>()
-    val loadingLive=MutableLiveData<Boolean>()
-    val errorMessage=MutableLiveData<Boolean>()
+    val loadingLive = MutableLiveData<Boolean>()
+    val errorMessage = MutableLiveData<Boolean>()
     private val productAPIService = ProductAPIService()
 
     fun refreshData() {
-        loadingLive.value=true
+        // Veriler çekilirken progressbar vısıble oluyor
+        loadingLive.value = true
+
         val myCall = productAPIService.getProducts()
         myCall.enqueue(object : Callback<List<Product>> {
             override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                errorMessage.value=true
-                loadingLive.value=false
+
+                // Hata varsa progressbar duruyor ve hata yazısı visible oluyor
+                errorMessage.value = true
+                loadingLive.value = false
                 t.printStackTrace()
             }
-            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                val products = response.body()!!
-                for (item in products){
-                    if (listOfCategory.contains(item.category)){
 
-                    }else{
+            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+
+                val products = response.body()!!
+                for (item in products) {
+
+                    /*Ürün listesinde ki  ürünler dolaşılarak her ürünün kategorisi listOfCategory'de var mı ona bakılıyor
+                     yoksa listOfCategory'e ekleniyor. Kategorilerin tekil olmasını sağlıyor*/
+
+                    if (listOfCategory.contains(item.category)) {
+                        println("Ürün listede var zaten ")
+                    } else {
                         listOfCategory.add(item.category)
                     }
                 }
-                errorMessage.value=false
-                loadingLive.value=false
-                categoryListLive.value=listOfCategory
+                errorMessage.value = false
+                loadingLive.value = false
+                categoryListLive.value = listOfCategory
             }
         })
     }

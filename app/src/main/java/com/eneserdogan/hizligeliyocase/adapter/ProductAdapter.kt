@@ -20,6 +20,7 @@ class ProductAdapter :
     var filterList = listOf<Product>()
     var originalList = listOf<Product>()
     fun setAppList(modelList: List<Product>) {
+        // Gelen list iki farklı değişkene set ediliyor, originalList filtrelenerek filterList değerine aktarılıyor //
         this.filterList = modelList
         this.originalList = modelList
         notifyDataSetChanged()
@@ -27,10 +28,11 @@ class ProductAdapter :
 
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        // Recyclerview itemlarında ki  değerler set ediliyor
         fun bind(data: Product) = with(itemView) {
             recyclerview_textview_price.text = data.price.toString() + " TL"
             recyclerview_textview_title.text = data.title.toString()
-            Glide.with(itemView.context).load(data.image).into(recyclerview_image_product)
+            Glide.with(itemView.context).load(data.image).into(recyclerview_image_product) // Ürün resmi glide ile set ediliyor
         }
 
     }
@@ -48,18 +50,8 @@ class ProductAdapter :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        // Her item için o pozisyonda ki ürüne ait bilgiler bind fonksiyonuna gönderiliyor
         holder.bind(this.filterList[position])
-        /* val recyclerImage: ImageView = holder.itemView.findViewById(R.id.recyclerview_image_product)
-         holder.itemView.recyclerview_textview_price.text = productList[position].price.toString() + " TL"
-         holder.itemView.recyclerview_textview_title.text = productList[position].title.toString()
-         Glide.with(holder.itemView.context).load(productList[position].image).into(recyclerImage)*/
+
     }
-
-    /* fun productListUpdate(newList: List<Product>) {
-         productList.clear()
-         productList.addAll(newList)
-         notifyDataSetChanged()
-     }*/
-
-
 }

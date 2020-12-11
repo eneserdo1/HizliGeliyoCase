@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
@@ -26,15 +27,21 @@ import kotlinx.coroutines.runBlocking
 class HomeFragment : Fragment() {
     private lateinit var viewmodel: HomeFragmentViewmodel
     private lateinit var productAdapter: ProductAdapter
-    var dataList: ArrayList<Product> = ArrayList()
+
+    var dataList: ArrayList<Product> = ArrayList() // Adaptera gönderilen boş list
+    var listOfFilteredCategory: ArrayList<Product> =
+        ArrayList() // Kategoriye göre filtrelenmiş ürünler
+
     lateinit var searchView: SearchView
-    lateinit var selectedItem:String
+    lateinit var selectedItem: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedItem=requireArguments().getString("selectedItem")!!
-        println("oncreate gelen item $selectedItem")
+
+        selectedItem =
+            requireArguments().getString("selectedItem")!! // Filter fragmentte seçilen kategori
+        Log.d("Seçilen Kategori", selectedItem)
     }
 
     override fun onCreateView(
@@ -53,67 +60,102 @@ class HomeFragment : Fragment() {
         searchView = view.findViewById(R.id.searcview)
 
         //fonksiyonlar
-        initializeRecyclerview(dataList)
-        filterButtonListener()
-        observeData()
-        if (selectedItem != "null"){
-            viewmodel.filterList(selectedItem,productAdapter)
+        initializeRecyclerview(dataList) // Recyclerview initialize ediliyor
+        sendFilterFragButtonListener() // Kategori filtreleme ekranına gidiş butonu
+        observeError() // Ürün yükleniyor ve hata mesajı değerleri gözleniyor
+
+
+        if (selectedItem != "") {
+
+            /* Gelen selectedItem değeri default "" değilse gelen kategori değerine göre
+            filteredCategoryListener fonksiyonuna gönderilere çekilen veri filtreleniyor */
+            filteredCategoryListener()
+            homeFragment_deleteFilter_button.setText(selectedItem) // Filtrelenen kategori butona set ediliyor
+            homeFragment_deleteFilter_button.visibility = View.VISIBLE
+            homeFragment_deleteFilter_button.setOnClickListener {
+                // Silme butonuna tıklanıldığında bütün ürünler set ediliyor
+                homeFragment_deleteFilter_button.setText(selectedItem)
+                homeFragment_deleteFilter_button.visibility = View.GONE
+                observeListData()
+            }
+        } else {
+            // Gelen değer default değer ise bütün ürünler listeleniyor
+            observeListData()
         }
+        // Searvhview dinleniyor
+        searchViewListener()
+    }
+
+    private fun sendFilterFragButtonListener() {
+        homeFragmnet_filter_butoon.setOnClickListener {
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_home_to_filterFragment)
+        }
+    }
 
 
+    private fun initializeRecyclerview(dataList: ArrayList<Product>) {
+        // Recyclerview initialize ediliyor
+        productAdapter = ProductAdapter()
+        product_recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
+        productAdapter.setAppList(dataList)
+        product_recyclerview.adapter = productAdapter
+
+    }
+
+    private fun searchViewListener() {
         //Ana sayfa searchview dinleniyor
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 if (p0 != null) {
+
+                    // Girilen string değeri viewmodelda bulunan fonksiyona gönderiliyor
                     viewmodel.filterList(p0, productAdapter)
+
                 }
                 return false
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 if (p0 != null) {
+                    // Girilen string değeri viewmodelda bulunan fonksiyona gönderiliyor
                     viewmodel.filterList(p0, productAdapter)
                 }
                 return false
             }
         })
-
     }
 
+    private fun filteredCategoryListener() {
+        /*Gelen kategori değeri ile çekilen tüm ilanların kategorileri karşılaştırılıyor,
+        aynı olanlar list'e ekleniyor ve adaptera set ediliyor*/
 
-    private fun filterButtonListener() {
-        homeFragmnet_filter_butoon.setOnClickListener {
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_navigation_home_to_filterFragment)
-
-        }
+        viewmodel.refreshData().observe(viewLifecycleOwner, Observer<List<Product>> {
+            if (it != null) {
+                for (item in it) {
+                    if (item.category.contains(selectedItem)) {
+                        listOfFilteredCategory.add(item)
+                    }
+                }
+                productAdapter.setAppList(listOfFilteredCategory)
+                product_recyclerview.visibility = View.VISIBLE
+            }
+        })
     }
 
-    private fun initializeRecyclerview(dataList: ArrayList<Product>) {
-        productAdapter = ProductAdapter()
-        product_recyclerview.layoutManager = GridLayoutManager(requireContext(), 2)
-        productAdapter.setAppList(dataList)
-        product_recyclerview.adapter = productAdapter
-    }
-
-    private fun observeData() {
-
-        /* viewmodel.productList.observe(viewLifecycleOwner, Observer<List<Product>> { products ->
-             products?.let {
-                 product_recyclerview.visibility = View.VISIBLE
-                 productAdapter.productListUpdate(products)
-                 itemList=products
-
-             }
-         })*/
+    private fun observeListData() {
+        // Tüm ürünler çekiliyor
         viewmodel.refreshData().observe(viewLifecycleOwner, Observer<List<Product>> {
             if (it != null) {
                 productAdapter.setAppList(it)
                 product_recyclerview.visibility = View.VISIBLE
             }
-
-
         })
+    }
+
+
+    private fun observeError() {
+        // Ekranda bulunan progressbar ve textview değerleri gelen boolean değere göre durum değiştiriliyor
 
         viewmodel.errorMessage.observe(viewLifecycleOwner, Observer { message ->
             message?.let {
@@ -138,6 +180,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
-
 }

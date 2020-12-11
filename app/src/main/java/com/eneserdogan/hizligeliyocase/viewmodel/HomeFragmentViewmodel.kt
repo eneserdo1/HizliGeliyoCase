@@ -13,14 +13,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFragmentViewmodel : ViewModel() {
-    var dataList:List<Product> = ArrayList()
-    private val mutableProductList:MutableLiveData<List<Product>> = MutableLiveData()
+    var dataList: List<Product> = ArrayList()
+    private val mutableProductList: MutableLiveData<List<Product>> = MutableLiveData()
     val loadingMessage = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<Boolean>()
 
     private val productAPIService = ProductAPIService()
 
-    fun refreshData() :LiveData<List<Product>> {
+    fun refreshData(): LiveData<List<Product>> {
         loadingMessage.value = true
         val myCall = productAPIService.getProducts()
         myCall.enqueue(object : Callback<List<Product>> {
@@ -28,25 +28,32 @@ class HomeFragmentViewmodel : ViewModel() {
                 loadingMessage.value = false
                 errorMessage.value = true
                 t.printStackTrace()
-
             }
 
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 val products = response.body()
-                if (products != null){
-                    dataList=products
+                if (products != null) {
+                    dataList = products
                     mutableProductList.postValue(dataList)
                 }
-
                 loadingMessage.value = false
                 errorMessage.value = false
             }
         })
         return mutableProductList
     }
+
+    /* Gelen string değere göre adapterda ki  original list değerleri filtreleniyor ve filtered liste set ediliyor.
+     Çünkü adapterda ki recyclerview değerlerine filtered liste göre değer veriliyor*/
     fun filterList(term: String, adapter: ProductAdapter) {
         if (term != "") {
-            val list = adapter.originalList.filter { it.category.contains(term, true) || it.title.contains(term,true) }
+            println("term  $term")
+            val list = adapter.originalList.filter {
+                it.category.contains(term, true) || it.title.contains(
+                    term,
+                    true
+                )
+            }
             adapter.filterList = list
             adapter.notifyDataSetChanged()
             Log.d("filterList : ", list.toString())
@@ -58,15 +65,4 @@ class HomeFragmentViewmodel : ViewModel() {
 
     }
 
-    /*fun getOnQueryTextChange(adapter: ProductAdapter) : SearchView.OnQueryTextListener = object : SearchView.OnQueryTextListener{
-        override fun onQueryTextChange(term: String?): Boolean {
-            if (term != null) { filterList(term, adapter) }
-            return false
-        }
-        override fun onQueryTextSubmit(term: String?): Boolean {
-            if (term != null) { filterList(term, adapter)
-            }
-            return false
-        }
-    }*/
 }

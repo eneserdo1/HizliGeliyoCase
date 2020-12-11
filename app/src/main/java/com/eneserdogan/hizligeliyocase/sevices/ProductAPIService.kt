@@ -13,6 +13,7 @@ class ProductAPIService {
         .build()
         .create(ProductAPI::class.java)
 
+    // API üzerinden çekilen değerler return ediliyor
     fun getProducts():Call<List<Product>>{
         return retrofit.getData()
     }
