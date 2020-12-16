@@ -39,6 +39,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:maxLines="2"
+                android:fontFamily="@font/titillium_web"
                 android:text="Nike Pegasus 37 EU291"/>
         </LinearLayout>
         <LinearLayout
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
                 android:textStyle="bold"
+                android:fontFamily="@font/titillium_web"
                 android:text="879,99 TL"/>
         </LinearLayout>
 

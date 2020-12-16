@@ -93,6 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hesabına Giriş Yap"
+                android:textColor="@color/brown"
                 android:textSize="22sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -225,6 +226,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Şifremi Unuttum"
+                android:textColor="@color/brown"
+                android:fontFamily="@font/titillium_web"
+
                 />
         </LinearLayout>
         <LinearLayout
@@ -322,7 +326,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/brown"
                     android:text="Hesabın Yok mu? "
+                    android:fontFamily="@font/titillium_web"
 
                     />
 
@@ -330,6 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" Kaydol"
+                    android:fontFamily="@font/titillium_web"
                     android:textColor="#00BCD4" />
             </LinearLayout>
 

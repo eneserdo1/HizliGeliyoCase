@@ -144,8 +144,9 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="15dp"
                     android:text="Sırala"
+                    android:fontFamily="@font/titillium_web"
                     android:textSize="24sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/brown_filter"
                     android:drawableStart="@drawable/ic_group"
                     />
 
@@ -162,8 +163,9 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_funnel"
                     android:background="@color/white"
-                    android:textColor="@color/black"
+                    android:textColor="@color/brown_filter"
                     android:drawablePadding="15dp"
+                    android:fontFamily="@font/titillium_web"
                     android:textSize="24sp"
                     android:text="Filtre"
                     />
