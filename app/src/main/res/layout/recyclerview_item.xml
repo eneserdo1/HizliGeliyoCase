@@ -1,35 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="180dp"
+<LinearLayout
+    android:layout_width="175dp"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
-    android:background="@color/white"
+    android:orientation="horizontal"
+    android:weightSum="1"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <ImageView
-        android:id="@+id/recyclerview_image_product"
-        android:layout_width="match_parent"
-        android:layout_height="118dp" />
-    <TextView
-        android:id="@+id/recyclerview_textview_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:maxLines="3"
-        android:text="Nike Pegasus 37 EU291"/>
-    <TextView
-        android:id="@+id/recyclerview_textview_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:text="879,99 TL"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.04">
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.92"
+        android:weightSum="5"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:layout_weight="3">
+            <ImageView
+                android:id="@+id/recyclerview_image_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/recyclerview_textview_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:text="Nike Pegasus 37 EU291"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8">
+            <TextView
+                android:id="@+id/recyclerview_textview_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:text="879,99 TL"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.04">
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

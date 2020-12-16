@@ -1,98 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeFragment"
-    android:elevation="10dp"
-    android:layout_marginBottom="50dp">
-    <LinearLayout
-        android:id="@+id/searchLayout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-        <SearchView
-            android:id="@+id/searcview"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:queryHint="Kategori veya ürün ara"
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_below="@id/searchLayout"
-        android:id="@+id/filterLayout"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="57dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="4"
-        >
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/filter_background"
-            android:gravity="center"
-            android:layout_weight="2">
-            <TextView
-                android:id="@+id/homeFragment_asc_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="15dp"
-                android:text="Sırala"
-                android:textColor="@color/black"
-                android:drawableStart="@drawable/ic_group"
-                />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@drawable/filter_background_1"
-            android:gravity="center">
-            <TextView
-                android:id="@+id/homeFragmnet_filter_butoon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_funnel"
-                android:background="@color/white"
-                android:textColor="@color/black"
-                android:drawablePadding="15dp"
-                android:text="Filtre"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-    <Button
-        android:id="@+id/homeFragment_deleteFilter_button"
-        android:layout_width="wrap_content"
-        android:layout_alignStart="@id/filterLayout"
-        android:layout_marginTop="5dp"
-        android:padding="5dp"
-        android:drawablePadding="5dp"
-        android:layout_height="40dp"
-        android:layout_below="@id/filterLayout"
-        android:drawableEnd="@drawable/ic_baseline_delete_forever_24"
-        android:background="@drawable/deletefilterbutton_background"
-        android:visibility="gone"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/product_recyclerview"
-        android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/homeFragment_deleteFilter_button"
+        android:weightSum="10"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1">
 
-        />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:weightSum="1"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.85">
+                    <SearchView
+                        android:id="@+id/searcview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:queryHint="Kategori veya ürün ara"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.15"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_1" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_2" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_3" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_4" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_5" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:background="@drawable/ic_rectangle_6" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1">
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
+                <Button
+                    android:id="@+id/homeFragment_deleteFilter_button"
+                    android:layout_width="match_parent"
+                    android:drawablePadding="5dp"
+                    android:layout_margin="5dp"
+                    android:layout_height="match_parent"
+                    android:drawableEnd="@drawable/ic_baseline_delete_forever_24"
+                    android:background="@drawable/deletefilterbutton_background"
+                    android:visibility="gone"/>
+                <!--        marjin-->
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:gravity="center"
+                android:background="@drawable/filter_background">
+                <TextView
+                    android:id="@+id/homeFragment_asc_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="15dp"
+                    android:text="Sırala"
+                    android:textSize="24sp"
+                    android:textColor="@color/black"
+                    android:drawableStart="@drawable/ic_group"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.4"
+                android:background="@drawable/filter_background_1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/homeFragmnet_filter_butoon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_funnel"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:drawablePadding="15dp"
+                    android:textSize="24sp"
+                    android:text="Filtre"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1">
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6.5"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.03">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.94">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/homeFragment_deleteFilter_button"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.03">
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8">
+
+        </LinearLayout>
+
+
+    </LinearLayout>
     <ProgressBar
         android:id="@+id/ürünYükleniyor"
         style="?android:attr/progressBarStyle"
